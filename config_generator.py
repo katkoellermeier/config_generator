@@ -12,13 +12,12 @@ elseif as-path in {{aspathset_name}} then
 
 aspathsetname = input("What is the as-path-set name?: ")
 aspathattribute = input("""What is the as path attribute?
-                        1. dfa-regex
-                        2. ios-regex
-                        3. length
-                        4. neighbor-is
-                        5. originates-from
-                        6. passes-through
-                        7. unique-length
+                        1. regex
+                        2. length
+                        3. neighbor-is
+                        4. originates-from
+                        5. passes-through
+                        6. unique-length
                         > """)
 
 aspathnumber = input("What is the as path number?: ")
