@@ -1,34 +1,19 @@
-import jinja2
+from string import Template
+import jinja2 
 
-config_generator="""
-as-path-set {{aspathset_name}}
-  {{as_path_attribute}} '{{as_path_number}}'
-end-set
+# Jinja2 template for Cisco switch interface VLAN assignment configuration
+interface_template = """
+interface {{ interface_name }}
+ switchport access {{ vlan_id }}
+end
+"""
 
-elseif as-path in {{aspathset_name}} then
-  set {{bgp_attribute}} {{attribute_number}}
-  #{{ticket_number}}
-  done """
+# Get user input
+interface_name = input("Interface name (e.g., GigabitEthernet1/0/1)? ")
+vlan_id = input("VLAN ID? ")
 
-aspathsetname = input("What is the as-path-set name?: ")
-aspathattribute = input("""What is the as path attribute?
-                        1. regex
-                        2. length
-                        3. neighbor-is
-                        4. originates-from
-                        5. passes-through
-                        6. unique-length
-                        > """)
-
-aspathnumber = input("What is the as path number?: ")
-bgpattribute = input("""Which bgp attribute is being manipulated?
-                        1. local pref
-                        2. med
-                        > """)
-
-attributenumber = input("What is the bgp attribute number?: ")
-ticketnumber = input("What is the ticket number?: ")
-config_generator= jinja2.Template(config_generator)
-a = config_generator.render(aspathset_name=aspathsetname, as_path_attribute=aspathattribute, as_path_number=aspathnumber, bgp_attribute=bgpattribute, attribute_number=attributenumber, ticket_number=ticketnumber)
+# Render the template
+interfacetemplate = jinja2.Template(interface_template)
+a = interfacetemplate.render(interface_name=interface_name, vlan_id=vlan_id)
 
 print(a)
